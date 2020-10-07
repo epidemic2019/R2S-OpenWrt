@@ -105,7 +105,8 @@ sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/
 ##获取额外package
 #luci-app-compressed-memory
 wget -O- https://github.com/openwrt/openwrt/compare/3f5cf3...NoTengoBattery:master.patch | patch -p1
-cp -rf ../NoTengoBattery/feeds/luci/applications/luci-app-compressed-memory ./feeds/luci/applications/luci-app-compressed-memory
+cp -rf ../NoTengoBattery/feeds/luci/applications/luci-app-compressed-memory ./package/new/luci-app-compressed-memory
+sed -i 's,include ../..,include $(TOPDIR)/feeds/luci,g' ./package/new/luci-app-compressed-memory/Makefile
 #更换cryptodev-linux
 rm -rf ./package/kernel/cryptodev-linux
 svn co https://github.com/project-openwrt/openwrt/trunk/package/kernel/cryptodev-linux package/kernel/cryptodev-linux
